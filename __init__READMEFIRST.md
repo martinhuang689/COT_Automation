@@ -12,7 +12,7 @@
 
 如果您是第一次使用，您將需要複製且運行一次以下四行程式碼，以下載所需的計算檔及模組:
 
-#DO 計算檔:<br>!wget https://raw.githubusercontent.com/martinhuang689/COT_Automation/555d5a93390f68fcb3c3adf463b5257d8dbe922d/checker5_DO_auto.py
+#DO 計算檔:<br>!wget https://raw.githubusercontent.com/martinhuang689/COT_Automation/c2a59375fc52e2b71669e078fd538485daf1f3c4/checker5_DO_auto.py
 
 
 #CA 計算檔:<br>!wget https://raw.githubusercontent.com/martinhuang689/COT_Automation/dbb6fe56a46a9d22c52c854519d6145b353096b2/checker1_CA_auto.py
