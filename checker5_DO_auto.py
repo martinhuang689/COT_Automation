@@ -1,7 +1,7 @@
 from datetime import datetime
 import colorama
 from colorama import Fore, Style
-import pyperclip
+#import pyperclip
 
 def parse_value(value_str):
     """Parse financial values that may be in range, inequality, or specific formats."""
@@ -226,5 +226,5 @@ def print_results(results, outcomes):
     print(Fore.YELLOW + parts[0] + Style.RESET_ALL + ", " + (Fore.GREEN if 'MED' in aml_remark else Fore.RED) + ", ".join(parts[1:]) + Style.RESET_ALL)
     
     # Handle clipboard copying
-    text = outcomes['NRICPassportNo']
-    pyperclip.copy(text)
+    #text = outcomes['NRICPassportNo']
+    #pyperclip.copy(text)
