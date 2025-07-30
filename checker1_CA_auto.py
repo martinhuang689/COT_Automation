@@ -67,6 +67,14 @@ def extract_number(s):
         return max(numbers)
     else:
         return 0
+    
+def extract_number_min(s):
+    """Extract the largest number from the string."""
+    numbers = extract_numbers(s)
+    if numbers:
+        return min(numbers)
+    else:
+        return 0
 
 # Function to process financial data (assumed from original context)
 def extract_largest_number(liquidasset, networth, income, duration):
@@ -74,6 +82,7 @@ def extract_largest_number(liquidasset, networth, income, duration):
     num1 = extract_number(liquidasset)
     num2 = extract_number(networth)
     num3 = extract_number(income)
+    num5 = extract_number_min(networth)
     if duration == "Not found":
         num4 = 0
     else:
@@ -81,7 +90,7 @@ def extract_largest_number(liquidasset, networth, income, duration):
             num4 = int(duration)
         except ValueError:
             num4 = 0
-    return num1, num2, num1 <= num2, num3, num3 * num4, num3 * num4 >= num2, num4
+    return num1, num2, num1 <= num2, num3, num3 * num4, num3 * num4 >= num5, num4
 
 # Function to check if a date is valid and in the future or today (assumed from original context)
 def check_date(date_str):
