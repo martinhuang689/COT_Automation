@@ -121,7 +121,8 @@ def process_client_data(document):
         'income_sources_check': check_income_sources_if_needed(data),
         'saving_from_salary_check': check_saving_from_salary_if_employed(data),
         'is_not_chinese_check': check_is_not_chinese(data),
-        'margin_false_count_check': check_margin_false_count(document)
+        'margin_false_count_check': check_margin_false_count(document),
+        'has_good_fund': "Good Fund (Auto FPS)" in document
     }
     
     # Extract outcomes
@@ -186,8 +187,12 @@ def print_results(results, outcomes):
     print(f"NRICPassportNo: {outcomes['NRICPassportNo']}")
     
     # Construct the sentence
-    parts = ["\nGood Fund (Auto FPS)"]
-    
+    parts = ["\n"]
+
+    # Check for "Good Fund (Auto FPS)"
+    if results['has_good_fund']:
+        parts.append("Good Fund (Auto FPS)")
+        
     # AML phrase
     aml_remark = outcomes.get('aml_remark', '')
     if "MED" in aml_remark:
@@ -223,7 +228,7 @@ def print_results(results, outcomes):
     parts.append(date_str)
     
     # Join and print
-    print(Fore.YELLOW + parts[0] + Style.RESET_ALL + ", " + (Fore.GREEN if 'MED' in aml_remark else Fore.RED) + ", ".join(parts[1:]) + Style.RESET_ALL)
+    print(Fore.YELLOW + parts[0] + Style.RESET_ALL + (Fore.GREEN if 'MED' in aml_remark else Fore.RED) + ", ".join(parts[1:]) + Style.RESET_ALL)
     
     # Handle clipboard copying
     #text = outcomes['NRICPassportNo']
