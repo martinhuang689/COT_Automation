@@ -69,27 +69,24 @@ def check_income_times_years_ge_estimated(data):
     employment_type = data.get('EmploymentType', '')
     rental_income = data.get('RentalIncome', '')
     other_income = data.get('OtherIncome', '')
-
-    if not income_str or not years_str or not estimated_str:
+        
+    if not income_str or not estimated_str:
         return False, "Missing data"
 
     try:
         lower_income, upper_income = parse_value(income_str)
-        years = int(years_str)
+        years = int(years_str) if years_str and years_str.isdigit() else 0  # Handle invalid or empty years_str
+        if years < 0:
+            return False, "YearsOfService cannot be negative"
         lower_estimated, upper_estimated = parse_value(estimated_str)
         max_product = upper_income * years
 
-        if employment_type in ['STUDENT', 'RETIRED', 'UNEMPLOYED']:
-            if rental_income == 'TRUE' or other_income == 'TRUE':
-                result = max_product >= lower_estimated
-                calculation_string = f"{upper_income} * {years} = {max_product} >= {lower_estimated}"
-            else:
-                result = max_product == 0
-                calculation_string = f"{upper_income} * {years} = {max_product}"
+        if employment_type in ['STUDENT', 'RETIRED', 'UNEMPLOYED', 'HOMEMAKER']:
+                result = upper_income == 0
+                calculation_string = f"{upper_income}"
         else:
             result = max_product >= lower_estimated
             calculation_string = f"{upper_income} * {years} = {max_product} >= {lower_estimated}"
-
         return result, calculation_string
     except ValueError:
         return False, "Invalid data"
