@@ -79,13 +79,13 @@ def check_income_times_years_ge_estimated(data):
         lower_estimated, upper_estimated = parse_value(estimated_str)
         max_product = upper_income * years
 
-        if employment_type in ['STUDENT', 'RETIRED']:
-            if not rental_income and not other_income:
-                result = max_product == 0
-                calculation_string = f"EmploymentType is {employment_type}, RentalIncome and OtherIncome are False, checking if {max_product} == 0"
-            else:
+        if employment_type in ['STUDENT', 'RETIRED', 'UNEMPLOYED']:
+            if rental_income == 'TRUE' or other_income == 'TRUE':
                 result = max_product >= lower_estimated
                 calculation_string = f"{upper_income} * {years} = {max_product} >= {lower_estimated}"
+            else:
+                result = max_product == 0
+                calculation_string = f"{upper_income} * {years} = {max_product}"
         else:
             result = max_product >= lower_estimated
             calculation_string = f"{upper_income} * {years} = {max_product} >= {lower_estimated}"
