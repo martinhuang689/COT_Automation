@@ -35,6 +35,8 @@ def extract_all_fields(text):
         "networth": {"pattern": r'资产净值\(港币\)\s*([^：\n]+)', "split_tab": True},
         "income": {"pattern": r'年薪\(港币\)\s*([^：\n]+)', "split_tab": True},
         "duration": {"pattern": r'受雇年期：\s*([^：\n]+)', "split_tab": True},
+        "bank": {"pattern": r'銀行名\(港幣\)：\s*([^：\n]+)', "split_tab": False},
+        "bank_acc": {"pattern": r'銀行帳戶\(港幣\)：\s*([^：\n]+)', "split_tab": False},
     }
 
     # Fields that require counting
