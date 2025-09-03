@@ -51,7 +51,7 @@ def check_liquid_vs_estimated(data):
     if not liquid_str or not estimated_str:
         return False
     try:
-        if liquid_str == '>HKD 1,000,000':
+        if liquid_str == '> HKD 1,000,000':
             _, estimated_upper = parse_value(estimated_str)
             return estimated_upper >= 1000000
         else:
@@ -74,7 +74,11 @@ def check_income_times_years_ge_estimated(data):
         return False, "Missing data"
 
     try:
-        lower_income, upper_income = parse_value(income_str)
+        if income_str == ">HKD$1,000,000":
+            upper_income = 10000000
+        else:
+            lower_income, upper_income = parse_value(income_str)
+
         years = int(years_str) if years_str and years_str.isdigit() else 0  # Handle invalid or empty years_str
         if years < 0:
             return False, "YearsOfService cannot be negative"
